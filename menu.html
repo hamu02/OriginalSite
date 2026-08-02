@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/suncalc/1.9.0/suncalc.min.js" defer></script>
+  <title>MENU|KISSA official website</title>
+  <meta name="description" content="カフェ「KISSA」のメニューを掲載しています。こだわりの浅煎りコーヒーをはじめ、さまざまなメニューをご用意しています。">
+  <meta name="viewport" content="width=device-width">
+  <script src="./js/moon.js" defer></script>
+  <script src="./js/common.js" defer></script>
+  <script src="./js/toggle-menu.js"></script>
+  <script src="./js/template.js" defer></script>
+  <link href="./css/common.css" rel="stylesheet">
+  <link href="./css/menu.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+  <!-- headerここから -->
+  <header class="header">
+    <div class="header-inner">
+      <a class="header-logo" href="./index.html">
+        <img src="./images/common/logo-header.png" alt="KISSA">
+      </a>
+      <button class="toggle-menu-button"></button>
+      <div class="header-site-menu">
+        <nav class="site-menu">
+          <ul>
+            <li><a href="./concept.html">CONCEPT</a></li>
+            <li><a href="./menu.html">MENU</a></li>
+            <li><a href="./shop.html">SHOP</a></li>
+            <li><a href="./access.html">ACCESS</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+  <!-- headerここまで -->
+
+  <!-- mainここから -->
+  <main class="main">
+    <div class="title">
+      <h1>MENU</h1>
+      <p>メニュー</p>
+    </div>
+    <ul class="item-list">
+    </ul>
+      <template id="template_sings">
+        <li>
+        <a href="" class="item-link">
+          <img src="" alt="">
+            <dl>
+              <dt class="item-name"></dt>
+              <dd class="item-desc"></dd>
+            </dl>
+            <p class="price"></p>
+            <p class="item-label"></p>
+          </a>
+        </li>
+      </template>
+  </main>
+  <!-- mainここまで -->
+
+  <!-- footerここから -->
+  <!-- 今までずらっと書いていた中身を消して、これだけにする！ -->
+  <footer class="footer"></footer>
+  <!-- footerここまで -->
+  <script src="./js/star.js"></script>
+  <script src="./js/include-star.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>ACCESS｜KISSA official website</title>
+  <meta name="description" content="カフェ「KISSA」のアクセスマップと問い合わせフォームが掲載されたページです。">
+  <meta name="viewport" content="width=device-width">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/suncalc/1.9.0/suncalc.min.js" defer></script>
+  <script src="./js/moon.js" defer></script>
+  <script src="./js/common.js" defer></script>
+  <script src="./js/toggle-menu.js" defer></script>
+  <script src="./js/board.js" defer></script>
+  <link href="./css/common.css" rel="stylesheet">
+  <link href="./css/access.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+  <!-- headerここから -->
+  <header class="header">
+    <div class="header-inner">
+      <a class="header-logo" href="./index.html">
+        <img src="./images/common/logo-header.png" alt="KISSA">
+      </a>
+      <button class="toggle-menu-button"></button>
+      <div class="header-site-menu">
+        <nav class="site-menu">
+          <ul>
+            <li><a href="./concept.html">CONCEPT</a></li>
+            <li><a href="./menu.html">MENU</a></li>
+            <li><a href="./shop.html">SHOP</a></li>
+            <li><a href="./access.html">ACCESS</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+  <!-- headerここまで -->
+
+  <!-- mainここから -->
+  <main class="main">
+    <div class="title">
+      <h1>BOARD</h1>
+      <p>みんなの掲示板</p>
+    </div>
+
+    <section class="post-form-area">
+      <h2>投稿する</h2>
+      <form id="post-form">
+        <div>
+          <label for="input-name">お名前（任意）</label>
+          <input type="text" id="input-name" placeholder="名無しさん">
+        </div>
+        <div>
+          <label for="input-title">タイトル</label>
+          <input type="text" id="input-title" required placeholder="タイトルを入力">
+        </div>
+        <div>
+          <label for="input-content">本文</label>
+          <textarea id="input-content" required rows="4" placeholder="メッセージを入力..."></textarea>
+        </div>
+        <button type="submit">投稿する</button>
+      </form>
+    </section>
+
+       <section class="post-list-area">
+      <h2>投稿一覧</h2>
+      <div id="post-list"></div>
+
+      <template id="template-post">
+        <article class="post-item">
+          <div class="post-header">
+            <h3 class="post-title"></h3>
+            <div class="post-meta">
+              <span class="post-name"></span>
+              <span class="post-date"></span>
+            </div>
+          </div>
+          <p class="post-content"></p>
+        </article>
+      </template>
+    </section>
+  </main>
+  <!-- mainここまで -->
+
+  <!-- footerここから -->
+  <footer class="footer"></footer>
+  <!-- footerここまで -->
+
+</body>
+
+</html>
