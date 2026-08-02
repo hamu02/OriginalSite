@@ -1,39 +1,27 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const detailsData = {
-    "americano": {
-      name: "アメリカーノ",
-      label: "RECOMMEND",
-      price: "450円",
-      imgSrc: "./images/menu/img-item01.jpg",
-      desc: "すっきりとした味わいのエスプレッソ抽出コーヒー",
-      article: "当店の熟練バリスタが抽出したエスプレッソを、最適なお湯の温度で割った一杯です。浅煎り豆ならではのフルーティーな酸味と澄んだコクがあり、ゴクゴク飲める爽やかさが人気です。暑い日にはアイスアメリカーノもおすすめです。"
-    },
-    "caffelatte": {
-      name: "カフェラテ",
-      label: "POPULAR",
-      price: "500円",
-      imgSrc: "./images/menu/img-item02.jpg",
-      desc: "濃厚なエスプレッソとまろやかなミルク",
-      article: "濃厚でコクのあるエスプレッソに、きめ細かくスチームした北海道産ミルクスチームを合わせました。ミルクの自然な甘みとコーヒーのほろ苦さが絶妙に調和した、心休まる定番メニューです。"
-    }
-  };
-
+document.addEventListener("DOMContentLoaded", async () => {
   const params = new URLSearchParams(window.location.search);
-  const itemId = params.get("id");
+  const starId = params.get("id");
 
-  const item = detailsData[itemId];
+  if (!starId) {
+        document.getElementById("detail-name").textContent = "指定された星が見つかりません。";
+        return;
+    }
 
-  if (item) {
-    document.getElementById("detail-name").textContent = item.name;
-    document.getElementById("detail-label").textContent = item.label;
-    document.getElementById("detail-price").textContent = item.price;
-    document.getElementById("detail-desc").textContent = item.desc;
-    document.getElementById("detail-article").textContent = item.article;
+  try {
+        const response = await fetch(`http://127.0.0.1:8000/api/stars/${starId}/`);
+        if (!response.ok) throw new Error("星の詳細データ取得に失敗しました");
 
-    const img = document.getElementById("detail-img");
-    img.src = item.imgSrc;
-    img.alt = item.name;
-  } else {
-    document.getElementById("detail-name").textContent = "商品が見つかりませんでした。";
-  }
+        const star = await response.json();
+
+        if (document.getElementById("detail-name")) document.getElementById("detail-name").textContent = star.name;
+        if (document.getElementById("detail-desc")) document.getElementById("detail-desc").textContent = star.summary;
+        if (document.getElementById("detail-article")) document.getElementById("detail-article").textContent = star.description;
+
+    } 
+    catch (error) {
+        console.error(error);
+        if (document.getElementById("detail-name")) {
+            document.getElementById("detail-name").textContent = "データの読み込みに失敗しました。";
+        }
+    }
 });

@@ -16,7 +16,6 @@ document.addEventListener("DOMContentLoaded", () => {
             <ul>
               <li><a href="./concept.html">CONCEPT</a></li>
               <li><a href="./menu.html">MENU</a></li>
-              <li><a href="./shop.html">SHOP</a></li>
               <li><a href="./access.html">ACCESS</a></li>
             </ul>
           </nav>
@@ -43,7 +42,6 @@ document.addEventListener("DOMContentLoaded", () => {
         <ul>
           <li><a href="./concept.html">CONCEPT</a></li>
           <li><a href="./menu.html">MENU</a></li>
-          <li><a href="./shop.html">SHOP</a></li>
           <li><a href="./access.html">BOARD</a></li>
         </ul>
       </nav>
