@@ -23,24 +23,8 @@
 <body>
 
   <!-- headerここから -->
-  <header class="header">
-    <div class="header-inner">
-      <a class="header-logo" href="./index.html">
-        <img src="./images/common/logo-header.png" alt="KISSA">
-      </a>
-      <button class="toggle-menu-button"></button>
-      <div class="header-site-menu">
-        <nav class="site-menu">
-          <ul>
-            <li><a href="./concept.html">CONCEPT</a></li>
-            <li><a href="./menu.html">MENU</a></li>
-            <li><a href="./shop.html">SHOP</a></li>
-            <li><a href="./access.html">ACCESS</a></li>
-          </ul>
-        </nav>
-      </div>
-    </div>
-  </header>
+ <!-- 修正後 -->
+  <header class="header"></header>
   <!-- headerここまで -->
 
   <!-- mainここから -->
@@ -63,20 +47,20 @@
         
       <template id="template_sings">
         <li>
-        <img src="" alt="">
-          <dl>
-            <dt class="item-name"></dt>
-            <dd class="item-desc"></dd>
-          </dl>
-          <p class="price"></p>
-          <p class="item-label"></p>
+          <a href="" class="item-link" style="text-decoration: none; color: inherit; display: block;">
+            <img src="" alt="" style="width: 100%; height: 180px; object-fit: cover; border-radius: 8px;">
+            <dl>
+              <dt class="item-name" style="font-weight: bold; margin-top: 10px;"></dt>
+              <dd class="item-desc" style="font-size: 13px; color: #666; margin-top: 5px;"></dd>
+            </dl>
+          </a>
         </li>
       </template>
 
       <div class="link-button-area">
-        <a class="link-button" href="./menu.html">MENU</a>
+        <a class="link-button" href="./menu.html">TARS一覧へ</a>
       </div>
-    </div>
+  </div>
   </main>
   <!-- mainここまで -->
 

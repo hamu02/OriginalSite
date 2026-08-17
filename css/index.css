@@ -63,7 +63,7 @@
 }
 
 .recommended {
-  background-color: #f8f8f8;
+  background-color: transparent;
   padding-top: 45px;
   padding-bottom: 55px;
 }
@@ -126,7 +126,7 @@
 @media (max-width: 800px) {
   .first-view {
     height: calc(100vh - 50px);
-    background-image: url(../images/index/bg-main-sp.jpg);
+    background-position: center center;
     align-items: flex-start;
   }
 

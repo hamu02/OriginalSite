@@ -3,7 +3,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   const starId = params.get("id");
 
   if (!starId) {
-        document.getElementById("detail-name").textContent = "指定された星が見つかりません。";
+        if (document.getElementById("detail-name")) {
+         document.getElementById("detail-name").textContent = "指定された星が見つかりません。";
+        }
         return;
     }
 
@@ -14,14 +16,20 @@ document.addEventListener("DOMContentLoaded", async () => {
         const star = await response.json();
 
         if (document.getElementById("detail-name")) document.getElementById("detail-name").textContent = star.name;
+        if (document.getElementById("detail-category")) document.getElementById("detail-category").textContent = star.category || '天体';
         if (document.getElementById("detail-desc")) document.getElementById("detail-desc").textContent = star.summary;
         if (document.getElementById("detail-article")) document.getElementById("detail-article").textContent = star.description;
 
-    } 
-    catch (error) {
-        console.error(error);
-        if (document.getElementById("detail-name")) {
-            document.getElementById("detail-name").textContent = "データの読み込みに失敗しました。";
-        }
+    const imgEl = document.getElementById("detail-img");
+    if (imgEl) {
+      imgEl.src = star.image_url ? star.image_url : "./images/menu/img-item01.jpg";
+      imgEl.alt = star.name;
     }
+
+  } catch (error) {
+    console.error(error);
+    if (document.getElementById("detail-name")) {
+      document.getElementById("detail-name").textContent = "データの読み込みに失敗しました。";
+    }
+  }
 });

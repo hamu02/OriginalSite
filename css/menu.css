@@ -80,6 +80,48 @@
   margin-top: 30px;
 }
 
+/* --- 詳細ページ用レイアウト設定（PC：左画像 / 右テキスト） --- */
+.menu-detail-area {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 930px;
+  max-width: 90%;
+  margin-top: 75px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* 左側：画像エリア */
+.menu-detail-area .detail-img-wrapper {
+  width: 360px;
+}
+
+.menu-detail-area .detail-img-wrapper img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+/* 右側：テキストエリア */
+.menu-detail-area .detail-info {
+  width: 500px;
+  max-width: 100%;
+}
+
+.detail-info .desc {
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.detail-info .article {
+  font-size: 15px;
+  line-height: 1.8;
+  white-space: pre-wrap;
+}
 /* 戻るボタン本体のデザイン */
 .back-link {
   display: inline-block;
@@ -101,8 +143,21 @@
 }
 
 @media (max-width: 800px) {
-  .item-list {
+  .menu-detail-area {
+    flex-direction: column;
+    width: 100%;
+    max-width: 500px;
     margin-top: 45px;
-    row-gap: 40px;
+  }
+
+  .menu-detail-area .detail-img-wrapper {
+    order: 1; 
+    width: 100%;
+    margin-bottom: 30px;
+  }
+
+  .menu-detail-area .detail-info {
+    order: 2; 
+    width: 100%;
   }
 }

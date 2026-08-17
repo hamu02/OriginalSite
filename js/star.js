@@ -13,10 +13,6 @@ function initStarAnimation() {
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
 
-// 2. マウス移動時の処理例
-    window.addEventListener('mousemove', (e) => {
-    createStar(e.clientX, e.clientY);
-    });
     class Star {
         constructor(x ,y){
             this.x = x;
@@ -78,3 +74,4 @@ function initStarAnimation() {
         }
     });
     }
+   document.addEventListener('DOMContentLoaded', initStarAnimation);

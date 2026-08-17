@@ -30,13 +30,18 @@ img {
   max-width: 100%;
 }
 
+.header {
+  width: 100%;
+}
+
 .header-inner {
-  max-width: 1200px;
-  height: 110px;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 40px;
-  padding-right: 40px;
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;          
+  width: 100%;
+  max-width: 100%;             
+  padding: 15px 40px;           
+  box-sizing: border-box;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -58,6 +63,10 @@ img {
 
 .site-menu ul {
   display: flex;
+  gap: 30px;                  
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 .site-menu ul li {
@@ -72,7 +81,7 @@ img {
 
 .footer {
   color: #ffffff;
-  background-color: #24211b;
+  background-color: #111226;
   padding-top: 30px;
   padding-bottom: 15px;
   display: flex;
@@ -109,7 +118,7 @@ img {
   left: 0;
   width: 100vw;
   height: 100vh;
-  z-index: -1;
+  z-index: 9999;
   pointer-events: none;
 }
 
@@ -188,6 +197,49 @@ body {
 .moon-shape.is-gibbous-reverse {
   background-color: #ffffff;
   box-shadow: inset 6px 0px 0px 0px rgba(11, 13, 27, 0.8);
+}
+
+.falling-star {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  color: #fff3a3;
+  text-shadow: 0 0 8px #ffffff, 0 0 15px #f4dd64;
+  font-size: 16px;
+  animation: fallAndFade 1.2s linear forwards;
+}
+
+@keyframes fallAndFade {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1) rotate(0deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(150px) scale(0.3) rotate(180deg);
+  }
+}
+
+.black-hole {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: radial-gradient(circle, #000000 60%, #311b92 85%, transparent 100%);
+  border-radius: 50%;
+  box-shadow: 0 0 60px 30px #7c4dff, inset 0 0 40px #000000;
+  transform: translate(-50%, -50%);
+  z-index: 10000;
+  pointer-events: none;
+  animation: spawnBlackHole 4s ease-in-out forwards;
+}
+
+@keyframes spawnBlackHole {
+  0% { width: 0px; height: 0px; opacity: 0; transform: translate(-50%, -50%) rotate(0deg); }
+  30% { width: 280px; height: 280px; opacity: 1; transform: translate(-50%, -50%) rotate(180deg); }
+  70% { width: 300px; height: 300px; opacity: 1; transform: translate(-50%, -50%) rotate(360deg); }
+  100% { width: 0px; height: 0px; opacity: 0; transform: translate(-50%, -50%) rotate(540deg); }
 }
 
 @media (max-width: 800px) {

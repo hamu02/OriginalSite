@@ -16,61 +16,60 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
+  <script src="./js/special-effects.js" defer></script>
 </head>
 
 <body>
 
   <!-- headerここから -->
-  <header class="header">
-    <div class="header-inner">
-      <a class="header-logo" href="./index.html">
-        <img src="./images/common/logo-header.png" alt="KISSA">
-      </a>
-      <button class="toggle-menu-button"></button>
-      <div class="header-site-menu">
-        <nav class="site-menu">
-          <ul>
-            <li><a href="./concept.html">CONCEPT</a></li>
-            <li><a href="./menu.html">MENU</a></li>
-            <li><a href="./shop.html">SHOP</a></li>
-            <li><a href="./access.html">ACCESS</a></li>
-          </ul>
-        </nav>
-      </div>
-    </div>
-  </header>
+<!-- 修正後 -->
+  <header class="header"></header>
   <!-- headerここまで -->
 
   <!-- mainここから -->
   <main class="main">
     <div class="title">
-      <h1>MENU</h1>
-      <p>メニュー</p>
+      <h1 style="font-family: 'Cinzel', serif;">STARS</h1>
+      <p>星の図鑑</p>
     </div>
-    <ul class="item-list">
+    <div class="filter-area" style="text-align: center; margin-bottom: 30px;">
+      <input type="text" id="searchInput" placeholder="星の名前で検索..." style="padding: 8px; width: 200px;">
+      <button id="searchBtn" style="padding: 8px 16px;">検索</button>
+      
+      <div class="tag-buttons" style="margin-top: 15px; display: flex; justify-content: center; gap: 10px;">
+        <button class="tag-btn" data-category="">すべて</button>
+        <button class="tag-btn" data-category="zodiac">12星座</button>
+        <button class="tag-btn" data-category="extra">変わり種天体</button>
+      </div>
+    </div>
+    <ul class="item-list" id="starContainer">
     </ul>
-      <template id="template_sings">
-        <li>
+     <template id="template_stars">
+      <li class="star-card">
         <a href="" class="item-link">
-          <img src="" alt="">
+          <img src="" alt="" class="item-img" style="width:100%; height:200px; object-fit:cover;">
+          <div class="item-content">
+            <span class="item-category" style="font-size: 12px; background: #eee; padding: 2px 8px;"></span>
             <dl>
-              <dt class="item-name"></dt>
-              <dd class="item-desc"></dd>
+              <dt class="item-name" style="font-weight: bold; margin-top: 10px;"></dt>
+              <dd class="item-summary" style="font-size: 14px; margin-top: 5px;"></dd>
             </dl>
-            <p class="price"></p>
-            <p class="item-label"></p>
-          </a>
-        </li>
-      </template>
+          </div>
+        </a>
+      </li>
+    </template>
   </main>
   <!-- mainここまで -->
 
   <!-- footerここから -->
   <!-- 今までずらっと書いていた中身を消して、これだけにする！ -->
-  <footer class="footer"></footer>
+  <footer class="footer">
+    <small>&copy; 2026 星と月の雑学図鑑 All Rights Reserved.</small>
+  </footer>
   <!-- footerここまで -->
   <script src="./js/star.js"></script>
   <script src="./js/include-star.js"></script>
+  <script src="./js/search.js"></script>
 
 </body>
 

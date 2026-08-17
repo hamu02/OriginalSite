@@ -1,6 +1,8 @@
 document.addEventListener("DOMContentLoaded", async () => {
-    const itemList = document.querySelector(".item-list");
-    const template = document.getElementById("template_sings");
+
+    const itemList = document.getElementById("starContainer") || document.querySelector(".item-list");
+    
+    const template = document.getElementById("template_stars") || document.getElementById("template_sings");
 
     if (!itemList || !template) return;
 
@@ -13,8 +15,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     const stars = await response.json();
 
     itemList.innerHTML = "";
+        const isTopPage = template.id === "template_sings";
+        const displayStars = isTopPage ? stars.slice(0, 6) : stars;
 
-    stars.forEach (star => {
+        displayStars.forEach(star => {
         const clone = template.content.cloneNode(true);
 
         const link = clone.querySelector(".item-link");
@@ -22,9 +26,9 @@ document.addEventListener("DOMContentLoaded", async () => {
             link.href = `./detail.html?id=${star.id}`;
         }
 
-        const img = clone.querySelector('img');
+        const img = clone.querySelector('.item-img') || clone.querySelector('img');
         if (img) {
-            img.src = "./images/menu/img-item01.jpg";
+            img.src = star.image_url ? star.image_url : "./images/menu/img-item01.jpg";
             img.alt = star.name;
         }
        
