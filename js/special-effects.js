@@ -1,8 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     window.addEventListener("scroll", () => {
     const scrolled = window.scrollY;
-    // 背景画像や星背景要素の位置を少しずつずらす
-    document.body.style.backgroundPositionY = `${scrolled * 0.3}px`;
+    document.body.style.backgroundPositionY = `${scrolled * 0.4}px`;
   });
 
   const searchInput = document.getElementById("searchInput");
@@ -45,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
       setTimeout(() => star.remove(), 1200);
     }
   }
-  const boardInput = document.getElementById("boardInput") || document.querySelector("textarea");
+  const boardInput = document.getElementById("input-content") || document.getElementById("boardInput") || document.querySelector("textarea");
 
   if (boardInput) {
     boardInput.addEventListener("input", (e) => {
