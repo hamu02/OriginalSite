@@ -9,6 +9,7 @@ from .models import Star, Comment
 
 from django.db.models import Q
 # Create your views here.
+
 def star_list(request):
     stars = Star.objects.all().order_by('id')
 
@@ -51,7 +52,7 @@ def star_detail(request, pk):
 
 @csrf_exempt
 def comment_list_create(request, star_pk):
-    star = get_object_or_404(Star, star_pk)
+    star = get_object_or_404(Star, pk=star_pk)
 
     if request.method == 'GET':
         comments = Comment.objects.filter(star=star)
@@ -78,8 +79,8 @@ def comment_list_create(request, star_pk):
 
             return JsonResponse({
                 'id': comment.id,
-                'author': comment.author,
-                'text': comment.text,
+                'name': comment.name,      
+                'message': comment.message,
                 'created_at': comment.created_at.strftime('%Y-%m-%d %H:%M:%S'),
             }, status=201)
             
