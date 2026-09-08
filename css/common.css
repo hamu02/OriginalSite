@@ -30,9 +30,6 @@ img {
   max-width: 100%;
 }
 
-.header {
-  width: 100%;
-}
 
 .header-inner {
   display: flex;
@@ -122,15 +119,46 @@ img {
   pointer-events: none;
 }
 
+/* bodyの背景画像設定をリセット */
 body {
   background-color: #0b0d1b; 
-  background-attachment: fixed;
-  background-size: cover;
-  background-repeat: no-repeat;
   color: #ffffff;
   margin: 0;
+  padding-top: 70px;
+  position: relative;
 }
 
+/* 🌌 動く宇宙背景専用レイヤー */
+.animated-space-bg {
+  position: fixed;
+  top: -20%;
+  left: -20%;
+  width: 140vw;
+  height: 140vh;
+  background-image: url('../images/background.PNG'); /* 背景画像のパス */
+  background-size: cover; /* 縦横比を崩さずに全画面をカバー */
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: -1; /* すべての要素の最背面に配置 */
+  pointer-events: none;
+  animation: spacePan 15s ease-in-out infinite alternate; /* 25秒周期でしっかり動かす */
+}
+
+/* 背景画像がダイナミックに漂うアニメーション */
+@keyframes spacePan {
+  0% {
+    transform: translate(0, 0) scale(1) rotate(0deg);
+  }
+  50% {
+    transform: translate(-50px, -30px) scale(1.08) rotate(1deg);
+  }
+  100% {
+    transform: translate(40px, -60px) scale(1.03) rotate(-1deg);
+  }
+}
+
+
+/* 🌕 ヘッダーの月相をクリック可能＆ホバー効果 */
 .moon-container {
   display: flex;
   align-items: center;
@@ -139,6 +167,13 @@ body {
   height: 30px;
   flex-shrink: 0;
   margin-right: 15px;
+  cursor: pointer; /* ポインターに変更 */
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.moon-container:hover {
+  transform: scale(1.25);
+  filter: drop-shadow(0 0 8px #ffffff);
 }
 
 .moon-shape {
@@ -202,6 +237,8 @@ body {
   box-shadow: inset 6px 0px 0px 0px rgba(11, 13, 27, 0.8);
 }
 
+
+
 .falling-star {
   position: fixed;
   pointer-events: none;
@@ -210,6 +247,103 @@ body {
   text-shadow: 0 0 8px #ffffff, 0 0 15px #f4dd64;
   font-size: 16px;
   animation: fallAndFade 1.2s linear forwards;
+}
+
+.moon-detail-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(11, 13, 27, 0.85);
+  backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10002;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.moon-detail-modal.is-show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.moon-detail-content {
+  background: rgba(22, 25, 48, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  padding: 30px;
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+  box-shadow: 0 0 30px rgba(124, 77, 255, 0.3), 0 0 15px rgba(255, 255, 255, 0.1);
+  position: relative;
+  transform: translateY(20px);
+  transition: transform 0.3s ease;
+}
+
+.moon-detail-modal.is-show .moon-detail-content {
+  transform: translateY(0);
+}
+
+.moon-detail-date {
+  font-size: 14px;
+  color: #ffe066;
+  margin-bottom: 5px;
+  letter-spacing: 1px;
+}
+
+.moon-detail-title {
+  font-size: 22px;
+  font-weight: bold;
+  color: #ffffff;
+  margin-bottom: 20px;
+}
+
+.moon-detail-large-icon {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto 20px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* モーダル内の月を巨大化 */
+.moon-detail-large-icon .moon-shape {
+  width: 80px !important;
+  height: 80px !important;
+}
+
+.moon-detail-desc {
+  font-size: 14px;
+  color: #e0e0e0;
+  line-height: 1.6;
+  margin-bottom: 25px;
+  text-align: left;
+  background: rgba(0, 0, 0, 0.25);
+  padding: 15px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.moon-detail-close-btn {
+  background: linear-gradient(135deg, #7c4dff, #536dfe);
+  color: #ffffff;
+  border: none;
+  padding: 10px 30px;
+  border-radius: 20px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.moon-detail-close-btn:hover {
+  opacity: 0.9;
+  transform: scale(1.05);
 }
 
 @keyframes fallAndFade {
@@ -243,6 +377,315 @@ body {
   30% { width: 280px; height: 280px; opacity: 1; transform: translate(-50%, -50%) rotate(180deg); }
   70% { width: 300px; height: 300px; opacity: 1; transform: translate(-50%, -50%) rotate(360deg); }
   100% { width: 0px; height: 0px; opacity: 0; transform: translate(-50%, -50%) rotate(540deg); }
+}
+
+/* 🌟 ヘッダーの流れ星アニメーション用設定 */
+.header {
+  position: fixed; /* relative から fixed に変更 */
+  top: 0;          /* 画面上部に固定 */
+  left: 0;         /* 左端に配置 */
+  z-index: 100;    /* 他の要素より前面に表示[cite: 1] */
+  width: 100%;     /* 幅を全域に指定[cite: 1] */
+  background-color: #0b0d1b; /* PC表示時の背景色を指定（スクロール時に下地が透けないようにするため）[cite: 1] */
+  overflow: hidden;
+}
+
+/* 流れ星のベース（光の尾） */
+.header-shooting-star {
+  position: absolute;
+  top: 0;
+  width: 120px; /* 尾の長さ */
+  height: 2px;
+  /* 左（尾の後ろ）から右（進行方向）に向かって白く光るグラデーション */
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 235, 150, 0.8) 70%, #ffffff 100%);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 10;
+  box-shadow: 0 0 8px #fff3a3;
+}
+
+/* 先端（右側）に付ける輝く星（✦） */
+.header-shooting-star::after {
+  content: "✦";
+  position: absolute;
+  right: -8px; /* 右先端に配置 */
+  top: -9px;
+  color: #ffffff;
+  font-size: 16px;
+  text-shadow: 0 0 6px #ffffff, 0 0 12px #ffe066;
+  line-height: 1;
+}
+
+/* 左上から右下へ流れるアニメーション */
+@keyframes headerShoot {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0) rotate(25deg) scale(0.3);
+  }
+  15% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(280px, 160px) rotate(25deg) scale(1.1);
+  }
+}
+
+.header-shooting-star.animate {
+  animation: headerShoot 1.2s ease-out forwards;
+}
+
+/* ==============================================
+   🔍 検索窓のイースターエッグ用スタイル
+============================================== */
+
+/* 1. 月（満月＆満ち欠け） */
+.easter-moon-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex; justify-content: center; align-items: center;
+  z-index: 10000;
+  pointer-events: none;
+  animation: fadeInOutMoon 20s forwards;
+}
+
+.easter-moon {
+  width: 250px; height: 250px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #ffffff, #e0e0e0 60%, #9e9e9e 100%);
+  box-shadow: 0 0 50px rgba(255, 255, 255, 0.8);
+  animation: moonPhaseAnim 20s ease-in-out forwards;
+}
+
+@keyframes fadeInOutMoon {
+  0% { opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+@keyframes moonPhaseAnim {
+  0% { transform: scale(0.5); filter: brightness(0.2); }
+  20% { transform: scale(1); filter: brightness(1); }
+  50% { filter: brightness(1.2); box-shadow: 0 0 80px rgba(255, 255, 255, 1); }
+  80% { filter: brightness(0.5); }
+  100% { transform: scale(0.8); opacity: 0; }
+}
+
+/* 2. 巨大な流れ星（シューティングスター） */
+.easter-shooting-star {
+  position: fixed;
+  top: -100px; left: -200px;
+  width: 600px; /* 300px -> 600px に倍増 */
+  height: 8px;  /* 4px -> 8px に太く */
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0), #ffffff 50%, #fff3a3 100%);
+  box-shadow: 0 0 40px #ffffff, 0 0 8px #ffe066, 0 0 120px #ffb703;
+  z-index: 10000;
+  pointer-events: none;
+  transform: rotate(35deg);
+}
+
+/* ゆっくり優雅に流れるアニメーション（4.5秒） */
+@keyframes giantStarAnim {
+  0% { transform: translate(0, 0) rotate(35deg) scaleX(0.2); opacity: 0; }
+  15% { opacity: 1; }
+  85% { opacity: 1; }
+  100% { transform: translate(140vw, 140vh) rotate(35deg) scaleX(1.8); opacity: 0; }
+}
+
+.flash-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(255, 255, 255, 0.25);
+  z-index: 9999;
+  pointer-events: none;
+  animation: flashAnim 1.5s ease-out forwards;
+}
+
+
+@keyframes flashAnim {
+  0% { opacity: 0; }
+  30% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+/* 3. UFO & キャトルミューティレーション */
+.easter-ufo {
+  position: fixed;
+  top: 10%; left: -200px;
+  font-size: 110px; /* 40px -> 110px に大幅拡大 */
+  z-index: 10000;
+  pointer-events: none;
+  animation: ufoFlyAnim 9s ease-in-out forwards;
+  filter: drop-shadow(0 0 20px #7c4dff);
+}
+
+.ufo-beam {
+  position: absolute;
+  top: 90px; left: 50%;
+  transform: translateX(-50%);
+  width: 0; height: 0;
+  border-left: 120px solid transparent;
+  border-right: 120px solid transparent;
+  border-bottom: 500px solid rgba(124, 77, 255, 0.45);
+  box-shadow: 0 0 30px rgba(124, 77, 255, 0.6);
+  opacity: 0;
+  animation: beamFlash 3s 3.5s forwards;
+}
+
+@keyframes ufoFlyAnim {
+  0% { left: -100px; }
+  40% { left: 45vw; }
+  70% { left: 45vw; }
+  100% { left: 110vw; }
+}
+
+@keyframes beamFlash {
+  0% { opacity: 0; }
+  30% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+/* 📜 共通説明メッセージボックス */
+.easter-message-box {
+  position: fixed;
+  bottom: 40px; left: 50%;
+  transform: translateX(-50%);
+  background: rgba(11, 13, 27, 0.9);
+  border: 1px solid #ffe066;
+  color: #ffffff;
+  padding: 15px 25px;
+  border-radius: 30px;
+  font-size: 14px;
+  line-height: 1.5;
+  box-shadow: 0 0 15px rgba(255, 224, 102, 0.4);
+  z-index: 10001;
+  pointer-events: none;
+  text-align: center;
+  animation: messageBoxAnim 8s forwards;
+}
+
+@keyframes messageBoxAnim {
+  0% { opacity: 0; transform: translate(-50%, 20px); }
+  10% { opacity: 1; transform: translate(-50%, 0); }
+  80% { opacity: 1; transform: translate(-50%, 0); }
+  100% { opacity: 0; transform: translate(-50%, -10px); }
+}
+
+/* 🛸 UFO用：ビームの光に照射されて空へ連れ去られる（キャトルミューティレーション） */
+.easter-message-box.abducted {
+  border-color: #7c4dff;
+  box-shadow: 0 0 25px #7c4dff;
+  /* UFOが中央に到着してビームを出すタイミングに合わせて発動 */
+  animation: abductTextAnim 8.5s ease-in-out forwards !important;
+}
+
+@keyframes abductTextAnim {
+  /* 0〜3.5秒：普通に画面下にメッセージが表示されている状態 */
+  0% { opacity: 0; transform: translate(-50%, 20px); }
+  10% { opacity: 1; transform: translate(-50%, 0); }
+  40% { opacity: 1; transform: translate(-50%, 0); }
+
+  /* 3.5〜4.5秒：UFOの光（ビーム）が当たって文字が怪しく強く発光する */
+  45% { 
+    opacity: 1; 
+    transform: translate(-50%, 0) scale(1.08);
+    background: rgba(124, 77, 255, 0.7);
+    color: #ffffff;
+    box-shadow: 0 0 50px #00e5ff, 0 0 100px #7c4dff;
+  }
+
+  /* 4.5〜6.5秒：光に包まれたまま、UFO（上空）へ向かってぐんぐん引き上げられていく */
+  75% { 
+    opacity: 0.9; 
+    transform: translate(-50%, -55vh) scale(0.3) rotate(12deg); 
+  }
+
+  /* 6.5秒〜：UFOの中に完全に吸い込まれて消滅 */
+  85%, 100% { 
+    opacity: 0; 
+    transform: translate(-50%, -65vh) scale(0) rotate(20deg); 
+  }
+}
+
+/* 🕳️ ブラックホール用：中心へ回転しながら吸い込まれて消滅する */
+.easter-message-box.swallowed {
+  border-color: #b388ff;
+  box-shadow: 0 0 20px #7c4dff;
+  animation: swallowTextAnim 4s ease-in-out forwards !important;
+}
+
+@keyframes swallowTextAnim {
+  0% { opacity: 0; transform: translate(-50%, 20px); }
+  15% { opacity: 1; transform: translate(-50%, 0); }
+  /* ブラックホールの成長に合わせて引き寄せられる */
+  50% { 
+    opacity: 1; 
+    transform: translate(-50%, -15vh) scale(0.9) rotate(-10deg);
+  }
+  /* 中心の特異点へ向かって捻じれながら消滅 */
+  100% { 
+    opacity: 0; 
+    transform: translate(-50%, -40vh) scale(0) rotate(720deg); 
+  }
+}
+
+/* 🎈 1. 無重力演出（画面全体の要素がダイナミックに浮遊） */
+.zero-g-active {
+  animation: zeroGFloat 7s ease-in-out infinite alternate !important;
+  transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+@keyframes zeroGFloat {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  25% { transform: translate(-15px, -25px) rotate(-3deg); }
+  50% { transform: translate(18px, -40px) rotate(4deg); }
+  75% { transform: translate(-20px, -18px) rotate(-2deg); }
+  100% { transform: translate(10px, -35px) rotate(2deg); }
+}
+
+/* 💥 2. 宇宙風ビッグバン粒子 */
+.bigbang-particle {
+  position: fixed;
+  pointer-events: none;
+  z-index: 10000;
+  border-radius: 50%;
+  animation: bigbangExplode ease-out forwards;
+}
+
+@keyframes bigbangExplode {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+    filter: brightness(2);
+  }
+  50% {
+    opacity: 0.9;
+  }
+  100% {
+    transform: translate(var(--tx), var(--ty)) scale(0);
+    opacity: 0;
+    filter: brightness(0.5);
+  }
+}
+
+/* 🖱️ 投稿カード内の対象キーワード（クリック可能） */
+.clickable-easter-word {
+  color: #ffe066;
+  text-decoration: underline;
+  cursor: pointer;
+  font-weight: bold;
+}
+.clickable-easter-word:hover {
+  color: #7c4dff;
+  text-shadow: 0 0 8px #7c4dff;
 }
 
 @media (max-width: 800px) {
