@@ -15,7 +15,10 @@
 }
 
 .title h1 {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+}
+
+padding-left{
   font-size: 32px;
   font-weight: bold;
 }
@@ -148,6 +151,10 @@
     width: 100%;
     max-width: 500px;
     margin-top: 45px;
+
+    padding-left: 20px;
+    padding-right: 20px;
+    box-sizing: border-box;
   }
 
   .menu-detail-area .detail-img-wrapper {

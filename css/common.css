@@ -19,7 +19,7 @@ a {
 }
 
 body {
-  font-family: sans-serif;
+  font-family: 'Zen Kaku Gothic New', sans-serif;
   font-size: 16px;
   color: #000000;
   line-height: 1;
@@ -72,7 +72,7 @@ img {
 }
 
 .site-menu ul li a {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Zen Kaku Gothic New', sans-serif;
   font-weight: bold;
 }
 
@@ -121,6 +121,7 @@ img {
 
 /* bodyの背景画像設定をリセット */
 body {
+  font-family: 'Zen Kaku Gothic New', sans-serif;
   background-color: #0b0d1b; 
   color: #ffffff;
   margin: 0;
@@ -387,7 +388,7 @@ body {
   z-index: 100;    /* 他の要素より前面に表示[cite: 1] */
   width: 100%;     /* 幅を全域に指定[cite: 1] */
   background-color: #0b0d1b; /* PC表示時の背景色を指定（スクロール時に下地が透けないようにするため）[cite: 1] */
-  overflow: hidden;
+  overflow: visible;
 }
 
 /* 流れ星のベース（光の尾） */
@@ -743,10 +744,11 @@ body {
     padding-top: 30px;
     padding-bottom: 50px;
     display: none;
+    z-index: 1000; 
   }
 
   .header-site-menu.is-show {
-    display: block;
+    display: block !important;
   }
 
   .toggle-menu-button {
@@ -763,10 +765,14 @@ body {
     border-radius: 0;
     outline: none;
     flex-shrink: 0;
+
+    cursor: pointer; 
+    position: relative;
+    z-index: 9999;  
   }
 
   .main {
-    padding-top: 70px;
+    padding-top: 0px;
   }
 
   .footer-logo {
@@ -780,4 +786,12 @@ body {
   .copyright {
     margin-top: 50px;
   }
+}
+/* 流れ星だけをヘッダー内に収める */
+.header-star-container {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
 }

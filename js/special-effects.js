@@ -312,6 +312,11 @@ let isShowerActive = false;
     const header = document.querySelector('.header');
     if (!header) return;
 
+    // 流れ星専用のコンテナを作る
+    const starContainer = document.createElement('div');
+    starContainer.className = 'header-star-container';
+    header.appendChild(starContainer);
+
     // 1本だけ流す内部関数
     function createSingleStar() {
       const star = document.createElement('div');
@@ -323,7 +328,7 @@ let isShowerActive = false;
       star.style.left = `${randomLeft}%`;
       star.style.top = `${randomTop}px`;
 
-      header.appendChild(star);
+      starContainer.appendChild(star);
 
       requestAnimationFrame(() => {
         star.classList.add('animate');
